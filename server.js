@@ -5,6 +5,8 @@
 var express = require('express');
 var app = express();
 
+
+
 // we've started you off with Express, 
 // but feel free to use whatever libs or frameworks you'd like through `package.json`.
 
@@ -16,22 +18,24 @@ app.get("/", function (request, response) {
   response.sendFile(__dirname + '/views/index.html');
 });
 
-app.get("/dreams", function (request, response) {
-  response.send(dreams);
+app.get("/:userInput", function (request, response) {
+  
+  var userInput = request.params.userInput;
+  var endPoint = "https://various-glue.glitch.me/";
+  var random = "shortURL/";
+  
+  response.json({
+      "original_url" : userInput,
+      "short_url" : endPoint + random
+  });
+  
 });
+
 
 // could also use the POST body instead of query string: http://expressjs.com/en/api.html#req.body
-app.post("/dreams", function (request, response) {
-  dreams.push(request.query.dream);
-  response.sendStatus(200);
-});
 
-// Simple in-memory store for now
-var dreams = [
-  "Find and count some sheep",
-  "Climb a really tall mountain",
-  "Wash the dishes"
-];
+
+
 
 // listen for requests :)
 var listener = app.listen(process.env.PORT, function () {
