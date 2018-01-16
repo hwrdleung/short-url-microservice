@@ -3,19 +3,15 @@
 
 // init project
 var express = require('express');
-var app = express();
 var fs = require('fs');
 var mongoose = require('mongoose');
+var cors = require('cors');
+var bodyParser = require('body-parser');
+var app = express();
 
-//connect to mongodb
-mongoose.Promise = global.Promise;
-mongoose.connect('ds163226.mlab.com:63226/noodlesdb');
-
-// we've started you off with Express, 
-// but feel free to use whatever libs or frameworks you'd like through `package.json`.
-
-// http://expressjs.com/en/starter/static-files.html
 app.use(express.static('public'));
+app.use(cors());
+app.use(bodyParser.json());
 
 // http://expressjs.com/en/starter/basic-routing.html
 app.get("/", function (request, response) {
