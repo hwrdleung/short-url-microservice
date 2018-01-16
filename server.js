@@ -4,14 +4,13 @@
 // init project
 var express = require('express');
 var app = express();
+var fs = require('fs');
 
 // we've started you off with Express, 
 // but feel free to use whatever libs or frameworks you'd like through `package.json`.
 
 // http://expressjs.com/en/starter/static-files.html
 app.use(express.static('public'));
-
-var urlArr = [];
 
 // http://expressjs.com/en/starter/basic-routing.html
 app.get("/", function (request, response) {
@@ -32,25 +31,20 @@ app.get("/:userInput", function (request, response) {
   var isShortUrl = false;
   var arrIndex = 0;
   
-  for(var i=0; i<urlArr.length; i++){
-    if(urlArr[i].short_url === check){
-       isShortUrl = true; 
-       arrIndex = i;
-       reroute = urlArr[i].original_url;
-    }
-  }
   
   if(isShortUrl){
       //then reroute to its orignal url
     response.sendFile(reroute);
   }else if(!isShortUrl){
-    console.log("not a short URL");
-      var jsonResponse = response.json({
+    
+    var jsonResponse = response.json({
       "original_url" : userInput,
       "short_url" : endPoint + random
   });
+    
+    //write to shorUrl.json
+    
   
-    urlArr.push(jsonResponse);
   response.json(jsonResponse);
     
   }  
