@@ -24,6 +24,9 @@ app.get("/:userInput", function (request, response) {
   var userInput = request.params.userInput; //this will either be a url or a random number
   var endPoint = "https://various-glue.glitch.me/";
   var check = endPoint + userInput;
+  var reroute = "";
+  var endPoint = "https://various-glue.glitch.me/";
+  var random = "shortURL/";
 
   //check if user input is a shortURL or a new url
   var isShortUrl = false;
@@ -33,12 +36,23 @@ app.get("/:userInput", function (request, response) {
     if(urlArr[i].short_url === check){
        isShortUrl = true; 
        arrIndex = i;
+       reroute = urlArr[i].original_url;
     }
   }
   
   if(isShortUrl){
       //then reroute to its orignal url
-    response.sendFile();
+    response.sendFile(reroute);
+  }else if(!isShortUrl){
+    console.log("");
+      var jsonResponse = response.json({
+      "original_url" : userInput,
+      "short_url" : endPoint + random
+  });
+  
+    urlArr.push(jsonResponse);
+  response.json(jsonResponse);
+    
   }
   
   //if userinput is a shortURL:
@@ -48,19 +62,9 @@ app.get("/:userInput", function (request, response) {
       //return json data
       //store json data in global array
   
-  var endPoint = "https://various-glue.glitch.me/";
-  var random = "shortURL/";
-  
-  var jsonResponse = response.json({
-      "original_url" : userInput,
-      "short_url" : endPoint + random
-  });
   
   
-  response.json({
-      "original_url" : userInput,
-      "short_url" : endPoint + random
-  });
+
   
 });
 
