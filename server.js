@@ -5,8 +5,7 @@
 var express = require('express');
 var app = express();
 
-
-
+var shortCuts = [];
 // we've started you off with Express, 
 // but feel free to use whatever libs or frameworks you'd like through `package.json`.
 
@@ -20,9 +19,24 @@ app.get("/", function (request, response) {
 
 app.get("/:userInput", function (request, response) {
   
+  //get userInput
+  //check if user input is a shortURL or a new url
+  
+  //if userinput is a shortURL:
+        //reroute user to its respective long url
+  
+  //if userinput is a
+  
   var userInput = request.params.userInput;
   var endPoint = "https://various-glue.glitch.me/";
   var random = "shortURL/";
+  
+  var jsonResponse = response.json({
+      "original_url" : userInput,
+      "short_url" : endPoint + random
+  });
+  
+  shortCuts.push(jsonResponse);
   
   response.json({
       "original_url" : userInput,
