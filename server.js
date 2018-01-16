@@ -31,7 +31,11 @@ app.get("/:userInput", function (request, response) {
   var isShortUrl = false;
   var arrIndex = 0;
   
-  fs.writeFileSync('shortUrl.json', {"it":"works"});
+  var test = {
+    "it":"works"
+  }
+  
+  fs.writeFileSync('shortUrl.json', test);
   
   if(isShortUrl){
       //then reroute to its orignal url
@@ -41,14 +45,12 @@ app.get("/:userInput", function (request, response) {
     var jsonResponse = {
       "original_url" : userInput,
       "short_url" : endPoint + random
-     });
-    
-    jsonResponse = JSON.stringify(jsonResponse);
-    
+     };
+        
     //write to shorUrl.json
     fs.writeFileSync('shortUrl.json', jsonResponse);
   
-  response.json(jsonResponse);
+    response.json(jsonResponse);
     
   }  
 });
