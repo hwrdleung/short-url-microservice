@@ -5,6 +5,11 @@
 var express = require('express');
 var app = express();
 var fs = require('fs');
+var mongoose = require('mongoose');
+
+//connect to mongodb
+mongoose.Promise = global.Promise;
+mongoose.connect('ds163226.mlab.com:63226/noodlesdb');
 
 // we've started you off with Express, 
 // but feel free to use whatever libs or frameworks you'd like through `package.json`.
