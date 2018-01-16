@@ -21,12 +21,12 @@ app.get("/", function (request, response) {
 app.get("/:userInput", function (request, response) {
   
   //get userInput
-  var userInput = request.params.userInput; //this will either be a url or a random number
+  var userInput = request.params.userInput; 
   var endPoint = "https://various-glue.glitch.me/";
   var check = endPoint + userInput;
   var reroute = "";
   var endPoint = "https://various-glue.glitch.me/";
-  var random = "shortURL/";
+  var random = "lol";
 
   //check if user input is a shortURL or a new url
   var isShortUrl = false;
@@ -44,7 +44,7 @@ app.get("/:userInput", function (request, response) {
       //then reroute to its orignal url
     response.sendFile(reroute);
   }else if(!isShortUrl){
-    console.log("");
+    console.log("not a short URL");
       var jsonResponse = response.json({
       "original_url" : userInput,
       "short_url" : endPoint + random
@@ -53,25 +53,8 @@ app.get("/:userInput", function (request, response) {
     urlArr.push(jsonResponse);
   response.json(jsonResponse);
     
-  }
-  
-  //if userinput is a shortURL:
-        //reroute user to its respective long url
-  
-  //if userinput is a new url:
-      //return json data
-      //store json data in global array
-  
-  
-  
-
-  
+  }  
 });
-
-
-// could also use the POST body instead of query string: http://expressjs.com/en/api.html#req.body
-
-
 
 
 // listen for requests :)
