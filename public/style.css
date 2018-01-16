@@ -10,20 +10,28 @@
 
 body {
   font-family: helvetica, arial, sans-serif;
-  margin: 25px;
+  margin: 0;
+  padding: 0;
   color: #000;
+  text-align: center;
+  width: 100%
+}
+  
+header {
+  border-bottom: 1px solid #000;
+  width: 100%;
 }
 
 h1 {
   font-weight: bold;
   font-size: 35px;
-  
+  text-align: center;
 }
 
 h2 {
   font-weight: bold;
   font-size: 25px;
-  
+  text-align: center;
 }
 
 
