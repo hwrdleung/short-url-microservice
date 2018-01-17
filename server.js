@@ -46,7 +46,12 @@ app.get('/:urlToShorten(*)', function (request, response) {
 
 //query database for shortUrl
 app.get('/:urlToForward', (request, response, next)=>{
-  var { shortUrl } = request.params.urlToForward;
+  var short_url = request.params.urlToForward;
+  shortUrl.findOne({'short_url' : short_url}, (err, data)=>{
+      //var re = new RegExp();
+    var strToCheck = data.original_url;
+    
+  });
 });
 
 
