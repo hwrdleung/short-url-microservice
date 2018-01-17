@@ -22,13 +22,31 @@ app.get("/", function (request, response) {
   response.sendFile(__dirname + '/views/index.html');
 });
 
-app.get('/new/:urlToShorten(*)', function (request, response) {
+app.get('/:urlToShorten(*)', function (request, response) {
   var { urlToShorten } = request.params;
   console.log(urlToShorten);
   
   //here, you would perform a check on urlToShorten to make sure it is a valid url  
-  var short = Math.floor(Math.random()*1000);
+  var short = Math.floor(Math.random()*100000).toString();
   
+  var data = new shortUrl({
+    original_url : urlToShorten,
+    short_url : short
+  });
+  
+  data.save(err=>{
+    if(err){
+     return response.send("Error saving to db"); 
+    }
+  });
+  
+  response.json(data);
+  
+});
+
+//query database for shortUrl
+app.get('/:urlToForward', (request, response, next)=>{
+  var { shortUrl } = request.params.urlToForward;
 });
 
 
