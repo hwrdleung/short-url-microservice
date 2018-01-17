@@ -15,7 +15,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 //connect to our database (mongodb)
-
+mongoose.connect('mongodb://noodles01:renewel010@ds163226.mlab.com:63226/noodlesdb');
 
 // http://expressjs.com/en/starter/basic-routing.html
 app.get("/", function (request, response) {
@@ -25,7 +25,12 @@ app.get("/", function (request, response) {
 app.get('/new/:urlToShorten(*)', function (request, response) {
   var { urlToShorten } = request.params;
   console.log(urlToShorten);
+  
+  //here, you would perform a check on urlToShorten to make sure it is a valid url  
+  var short = Math.floor(Math.random()*1000);
+  
 });
+
 
 
 
