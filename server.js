@@ -8,10 +8,14 @@ var mongoose = require('mongoose');
 var cors = require('cors');
 var bodyParser = require('body-parser');
 var app = express();
+var shortUrl = require('./models/shortUrl');
 
 app.use(express.static('public'));
 app.use(cors());
 app.use(bodyParser.json());
+
+//connect to our database (mongodb)
+
 
 // http://expressjs.com/en/starter/basic-routing.html
 app.get("/", function (request, response) {
