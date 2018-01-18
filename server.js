@@ -58,8 +58,22 @@ app.get('/:userInput(*)', function(request, response){
   }
   
  //check if userInput exists in our database
-  userInput.findOne({
-    short_url : userInput
+  shortUrl.findOne({'short_url' : userInput} , (err, data)=>{
+    if(err){
+      return response.send('Error reading database');
+    }
+    
+    //this block of code just takes the original_url in the database and checks to see if it
+    //begins with 'http'.  if it doesn't, then it prepends 'http' to data.orignal_url
+    //if no http, then response.redirect() will think it is a local file
+    var re = new RegExp("^(http|https)://","i");
+    var strToTest = data.original_url;
+    if(re.test(strToTest)){
+      response.redirect(301, data.original_url);                     
+    } else {
+       response.redirect(301, 'http://' + data.original_url); 
+    }
+    
   });
   
   
