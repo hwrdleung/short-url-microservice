@@ -25,7 +25,10 @@ header {
 }
 
 section {
- padding: 100px; 
+ padding: 50px; 
+  margin: 0 auto;
+ border-bottom: 1px solid silver;
+ width: 80%;
 }
 
 h1 {
