@@ -67,6 +67,7 @@ app.get('/:userInput(*)', function(request, response){
     //begins with 'http'.  if it doesn't, then it prepends 'http' to data.orignal_url
     //if no http, then response.redirect() will think it is a local file
     if(data !==  null){
+        //redirect to orignal url
         var re = new RegExp("^(http|https)://","i");
         var strToTest = data.original_url;
         if(re.test(strToTest)){
@@ -76,91 +77,13 @@ app.get('/:userInput(*)', function(request, response){
         }
             response.json(data.original_url);
     }else if(data === null){
-      response.sendFile(p);
+      //redirect to index.html
+      response.sendFile(__dirname + '/views/index.html');
     }
   });
-  
-  
-
-});
-
-/*
-app.get('/:urlToShorten(*)', function (request, response) {
-  
-  var { urlToShorten } = request.params.urlToShorten;
-  
-  var regex = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;  
-    
-  if(regex.test(urlToShorten)){
-    //if urlToShorten passes Regex test, then it is a valid url.
-    //generate a random number to create a new shortURL for urlToShorten
-    //save this data to database using Object.save();
-    var randomNumber = Math.floor(Math.random() * 100000).toString();
-    var data = new shortUrl({
-      original_url: urlToShorten,
-      short_url: randomNumber
-    });
-    
-    data.save(err=>{
-      if(err){
-         return response.send('Error saving to database');
-      }
-    });
-    
-    return response.json(data);
-  } 
-  
-  var shortExists = false;
-  shortUrl.findOne({'short_url' : urlToShorten} , (err, data)=>{
-    if(err){
-      return response.send('Error reading database');
-    }
-    shortExists = true;
-  });
-  
-  if(shortExists){
-    var re = new RegExp("^(http|https)://","i");
-    var strToTest = data.original_url;
-    if(re.test(strToTest)){
-      response.redirect(301, data.original_url);                     
-    } else {
-       response.redirect(301, 'http://' + data.original_url); 
-    }
-  }
-  
-  var data = new shortUrl({
-    original_url : urlToShorten,
-    short_url : "Invalid URL"
-  });
-  return response.json(data);
 });
 
 
-//if shortURL is entered, redirect to its corresponding original url
-//query database and forward orignal url
-app.get(':/urlToForward', (request, response, next)=>{
-    //stores value of short url
-    var { shorterUrl } = request.params.urlToForward; 
-    //findOne() allows us to pass in an object and see if it exists in the database
-  
-  //check these variables
-  shortUrl.findOne({'shorterUrl' : shorterUrl} , (err, data)=>{
-    if(err){
-     return response.send("Error reading database"); 
-    }
-  
-    var re = new RegExp("^(http|https)://","i");
-    var strToTest = data.original_url;
-    if(re.test(strToTest)){
-      response.redirect(301, data.original_url);                     
-    } else {
-       response.redirect(301, 'http://' + data.original_url); 
-    }
-  });
-    
-});
-
-*/
 // listen for requests :)
 var listener = app.listen(process.env.PORT, function () {
   console.log('Your app is listening on port ' + listener.address().port);
