@@ -48,6 +48,24 @@ app.get('/:urlToShorten(*)', function (request, response) {
     return response.json(data);
   } 
   
+  var shortExists = false;
+  shortUrl.findOne({'shorterUrl' : urlToShorten} , (err, data)=>{
+    if(err){
+      return response.send('Error reading database');
+    }
+    shortExists = true;
+  });
+  
+  if(shortExists){
+    var re = new RegExp("^(http|https)://","i");
+    var strToTest = data.original_url;
+    if(re.test(strToTest)){
+      response.redirect(301, data.original_url);                     
+    } else {
+       response.redirect(301, 'http://' + data.original_url); 
+    }
+  }
+  
   var data = new shortUrl({
     original_url : urlToShorten,
     short_url : "Invalid URL"
@@ -55,7 +73,7 @@ app.get('/:urlToShorten(*)', function (request, response) {
   return response.json(data);
 });
 
-
+/*
 //if shortURL is entered, redirect to its corresponding original url
 //query database and forward orignal url
 app.get(':/urlToForward', (request, response, next)=>{
@@ -80,7 +98,7 @@ app.get(':/urlToForward', (request, response, next)=>{
     
 });
 
-
+*/
 // listen for requests :)
 var listener = app.listen(process.env.PORT, function () {
   console.log('Your app is listening on port ' + listener.address().port);
