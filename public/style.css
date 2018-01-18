@@ -6,6 +6,7 @@
 
 * {
   box-sizing: border-box;
+  user-select: none;
 }
 
 body {
@@ -46,14 +47,31 @@ p {
 
 #urlInput {
   width: 60%;
-  height: 50px;
+  height: 60px;
+  font-size: 50px;
+  padding: 0 35px;
+  border-radius: 30px;
+  border: 1px solid #262626;
+  outline: none
 }
 
 .btn {
-  width: 20%;
+  width: 30%;
   height: 50px;
-  padding: 10px;
+  padding: 0 10px;
   margin: 20px auto;
+  font-size: 30px;
+  background: #FFF;
+  border: 1px solid #262626;
+  color: #2626262;
+  transition: background 1s, color 1s;
+  border-radius: 10px;
+}
+
+.btn:hover{
+  background: #262626;
+  color: #FFF;
+  transition: background 1s, color 1s;
 }
 
 
