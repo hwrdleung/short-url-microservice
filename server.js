@@ -20,7 +20,7 @@ mongoose.connect('mongodb://noodles01:renewel010@ds163226.mlab.com:63226/noodles
 // http://expressjs.com/en/starter/basic-routing.html
 app.get("/", function (request, response) {
   response.sendFile(__dirname + '/views/index.html');
-});
+}); 
 
 app.get('/:urlToShorten(*)', function (request, response) {
   var { urlToShorten } = request.params;
