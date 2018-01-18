@@ -46,7 +46,7 @@ app.get('/:urlToShorten(*)', function (request, response) {
     });
     
     return response.json(data);
-  }
+  } 
   
   var data = new shortUrl({
     original_url : urlToShorten,
