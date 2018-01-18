@@ -17,6 +17,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
   <body>
     <header>
@@ -29,9 +30,14 @@
     </header>
     
     <section>
-      <input type="text" placeholder="Enter your URL" id="urlInput">
-      <br>
-      <button onclick="button()" class="btn">GET SHORT URL</button>
+      <div class="input-wrapper">
+        <i class="fa fa-globe" aria-hidden="true"></i>        
+        <input type="text" placeholder="Enter your URL" id="urlInput">
+      </div>
+
+        <br>
+        <button onclick="button()" class="btn">GET SHORT URL</button>
+        
     </section>
     
     <section>

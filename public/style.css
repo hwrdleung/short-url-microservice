@@ -65,7 +65,7 @@ p {
 }
 
 
-#urlInput {
+.input-wrapper {
   width: 80%;
   height: 60px;
   font-size: 50px;
