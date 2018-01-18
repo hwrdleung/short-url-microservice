@@ -56,8 +56,24 @@ app.get('/:urlToShorten(*)', function (request, response) {
 });
 
 
-
-
+//if shortURL is entered, redirect to its corresponding original url
+//query database and forward orignal url
+app.get(':/urlToForward', (request, response, next)=>{
+    //stores value of short url
+    var { shorterUrl } = request.params.urlToForward; 
+    //findOne() allows us to pass in an object and see if it exists in the database
+  
+  //check these variables
+  shortUrl.findOne({'shorterUrl' : shorterUrl} , (err, data)=>{
+    if(err){
+     return response.send("Error reading database"); 
+    }
+  
+                         
+                          
+  });
+    
+});
 
 
 // listen for requests :)
