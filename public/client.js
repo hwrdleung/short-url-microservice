@@ -4,23 +4,14 @@
 // by default, you've got jQuery,
 // add other scripts at the bottom of index.html
 
-$(function() {
-  console.log('hello world :o');
+function button(){
+  //get whatever is in the form 
+  //attatch it to the end of our endpoint
+  //redirect browser to this new url and let server.js do its magic
+  console.log("Button lol");
+  var urlInput = document.querySelector('#urlInput').value;
+  var endPoint = "https://various-glue.glitch.me/"
+  var newUrl = endPoint + urlInput;
   
-  $.get('/dreams', function(dreams) {
-    dreams.forEach(function(dream) {
-      $('<li></li>').text(dream).appendTo('ul#dreams');
-    });
-  });
-
-  $('form').submit(function(event) {
-    event.preventDefault();
-    var dream = $('input').val();
-    $.post('/dreams?' + $.param({dream: dream}), function() {
-      $('<li></li>').text(dream).appendTo('ul#dreams');
-      $('input').val('');
-      $('input').focus();
-    });
-  });
-
-});
+  window.location.href = newUrl;
+}
