@@ -27,7 +27,16 @@ app.get('/:urlToShorten(*)', function (request, response) {
   
   var { urlToShorten } = request.params;
   
+  var regex = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;  
     
+  if(regex.test(urlToShorten)){
+    
+    var short = Math.floor(Math.random() * 100000).toString();
+    var 
+    return response.json({urlToShorten : "works"});
+  }
+  
+  return response.json({urlToShorten : "Failed"});
 });
 
 
