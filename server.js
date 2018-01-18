@@ -51,6 +51,7 @@ app.get('/:urlToForward', (request, response, next)=>{
       //var re = new RegExp();
     var strToCheck = data.original_url;
     
+    
   });
 });
 
