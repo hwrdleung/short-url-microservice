@@ -22,10 +22,24 @@ app.get("/", function (request, response) {
   response.sendFile(__dirname + '/views/index.html');
 }); 
 
+app.get('/:userInput(*)', function(request, resonse){
+  
+  /*
+  possible scenarios:
+  -userInput is a valid url ==> generate random number for short url, save orignal and short url to db. response with json
+  -userInput is not a valid url, then it is one of either of the following:
+      --userInput is an exist short url ==> get original url from db and redirect
+      --userInput is garbage ==> redirect to index.html
+  */
+  
+  
 
+});
+
+/*
 app.get('/:urlToShorten(*)', function (request, response) {
   
-  var { urlToShorten } = request.params;
+  var { urlToShorten } = request.params.urlToShorten;
   
   var regex = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;  
     
@@ -49,7 +63,7 @@ app.get('/:urlToShorten(*)', function (request, response) {
   } 
   
   var shortExists = false;
-  shortUrl.findOne({'shorterUrl' : urlToShorten} , (err, data)=>{
+  shortUrl.findOne({'short_url' : urlToShorten} , (err, data)=>{
     if(err){
       return response.send('Error reading database');
     }
@@ -73,7 +87,7 @@ app.get('/:urlToShorten(*)', function (request, response) {
   return response.json(data);
 });
 
-/*
+
 //if shortURL is entered, redirect to its corresponding original url
 //query database and forward orignal url
 app.get(':/urlToForward', (request, response, next)=>{
