@@ -22,7 +22,7 @@ app.get("/", function (request, response) {
   response.sendFile(__dirname + '/views/index.html');
 }); 
 
-app.get('/:userInput(*)', function(request, resonse){
+app.get('/:userInput(*)', function(request, response){
   
   /*
   possible scenarios:
@@ -31,6 +31,36 @@ app.get('/:userInput(*)', function(request, resonse){
       --userInput is an exist short url ==> get original url from db and redirect
       --userInput is garbage ==> redirect to index.html
   */
+  
+  var userInput = request.params.userInput;
+  var regex = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;  
+  
+  if(regex.test(userInput)){
+    //if userInput is a valid url, then save data to database and display json data
+    var newNumber = Math.floor(Math.random() * 10000).toString();
+    
+    //create new shortUrl object
+    var data = new shortUrl({
+      original_url : userInput,
+      short_url : newNumber
+    });
+    
+    //save to database
+    data.save(function(err){
+      if(err){
+         return response.send("Error saving to database"); 
+      }
+    });
+    //dont forget to handle error
+    
+    //display json data
+    return response.json(data);
+  }
+  
+ //check if userInput exists in our database
+  userInput.findOne({
+    short_url : userInput
+  });
   
   
 
