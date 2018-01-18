@@ -81,7 +81,7 @@ p {
   height: 60px;
   width: 90%;
   margin: 0;
-  padding: 0 20px 0 20px;
+  padding: 0 0 0 20px;
   outline: none;
   background: transparent;
   font-size: 50px;
@@ -90,7 +90,7 @@ p {
 
 #globe {
  font-size: 40px; 
-  color: gray;
+  color: blue;
 }
 
 .btn {
@@ -107,7 +107,7 @@ p {
 }
 
 .btn:hover{
-  background: #262626;
+  background: blue;
   color: #FFF;
   transition: background 1s, color 1s;
 }
