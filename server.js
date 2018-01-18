@@ -17,17 +17,17 @@ app.use(bodyParser.json());
 //connect to our database (mongodb)
 mongoose.connect('mongodb://noodles01:renewel010@ds163226.mlab.com:63226/noodlesdb');
 
-// http://expressjs.com/en/starter/basic-routing.html
+//reroute to index.html
 app.get("/", function (request, response) {
   response.sendFile(__dirname + '/views/index.html');
 }); 
 
-app.get('/:urlToShorten(*)', function (request, response) {
-  var { urlToShorten } = request.params;
-  console.log(urlToShorten);
+
+app.get('/:userInput(*)', function (request, response) {
+  var { userInput } = request.params;
   
-  //here, you would perform a check on urlToShorten to make sure it is a valid url  
-  
+  //check if urlToShorten is a URL
+  //THANK YOU STACKOVERFLOW  
   var urlPattern = new RegExp('^(https?:\/\/)?'+ // protocol
     '((([a-z\d]([a-z\d-]*[a-z\d])*)\.)+[a-z]{2,}|'+ // domain name
     '((\d{1,3}\.){3}\d{1,3}))'+ // OR ip (v4) address
@@ -35,13 +35,20 @@ app.get('/:urlToShorten(*)', function (request, response) {
     '(\?[;&a-z\d%_.~+=-]*)?'+ // query string
     '(\#[-a-z\d_]*)?$','i'); // fragment locater
   
-  if(!urlPattern.test(urlToShorten)) {
+  if(!urlPattern.test(userInput)) {
 
-    return false;
+    //query database for shortUrl
+    userInput.findOne({'short_url' : short_url}, (err, data)=>{
+      //var re = new RegExp();
+    var original_url = data.original_url;
+      
+    
+    
+    response.redirect(origina_url);
+    
+    
   } else {
-    return true;
-  }
-  
+    
   var short = Math.floor(Math.random()*100000).toString();
   var data = new shortUrl({
     original_url : urlToShorten,
@@ -54,20 +61,10 @@ app.get('/:urlToShorten(*)', function (request, response) {
     }
   });
   
-  response.json(data);
-  
+  response.json(data);  }
+    
 });
 
-//query database for shortUrl
-app.get('/:urlToForward', (request, response, next)=>{
-  var short_url = request.params.urlToForward;
-  shortUrl.findOne({'short_url' : short_url}, (err, data)=>{
-      //var re = new RegExp();
-    var strToCheck = data.original_url;
-    
-    response.redirect(strToCheck);
-  });
-});
 
 
 
