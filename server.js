@@ -37,21 +37,21 @@ app.get('/:userInput(*)', function (request, response) {
   
   if(!urlPattern.test(userInput)) {
 
+    var original_url;
     //query database for shortUrl
-    userInput.findOne({'short_url' : short_url}, (err, data)=>{
+    userInput.findOne({'short_url' : userInput}, (err, data)=>{
       //var re = new RegExp();
-    var original_url = data.original_url;
-      
+    original_url = data.original_url;
+  
+        });
     
-    
-    response.redirect(origina_url);
-    
-    
+    response.redirect(original_url);
+        
   } else {
     
   var short = Math.floor(Math.random()*100000).toString();
   var data = new shortUrl({
-    original_url : urlToShorten,
+    original_url : userInput,
     short_url : short
   });
   
