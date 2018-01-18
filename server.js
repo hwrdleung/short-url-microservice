@@ -27,8 +27,22 @@ app.get('/:urlToShorten(*)', function (request, response) {
   console.log(urlToShorten);
   
   //here, you would perform a check on urlToShorten to make sure it is a valid url  
-  var short = Math.floor(Math.random()*100000).toString();
   
+  var urlPattern = new RegExp('^(https?:\/\/)?'+ // protocol
+    '((([a-z\d]([a-z\d-]*[a-z\d])*)\.)+[a-z]{2,}|'+ // domain name
+    '((\d{1,3}\.){3}\d{1,3}))'+ // OR ip (v4) address
+    '(\:\d+)?(\/[-a-z\d%_.~+]*)*'+ // port and path
+    '(\?[;&a-z\d%_.~+=-]*)?'+ // query string
+    '(\#[-a-z\d_]*)?$','i'); // fragment locater
+  
+  if(!urlPattern.test(urlToShorten)) {
+
+    return false;
+  } else {
+    return true;
+  }
+  
+  var short = Math.floor(Math.random()*100000).toString();
   var data = new shortUrl({
     original_url : urlToShorten,
     short_url : short
@@ -51,7 +65,7 @@ app.get('/:urlToForward', (request, response, next)=>{
       //var re = new RegExp();
     var strToCheck = data.original_url;
     
-    
+    response.redirect(strToCheck);
   });
 });
 
