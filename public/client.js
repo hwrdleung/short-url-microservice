@@ -10,7 +10,7 @@ function button(){
   //redirect browser to this new url and let server.js do its magic
   console.log("Button lol");
   var urlInput = document.querySelector('#urlInput').value;
-  var endPoint = "https://various-glue.glitch.me/"
+  var endPoint = "https://various-glue.glitch.me/new/"
   var newUrl = endPoint + urlInput;
   
   window.location.href = newUrl;

@@ -14,12 +14,13 @@ body {
   padding: 0;
   color: #000;
   text-align: center;
-  width: 100%
+  width: 100;
 }
   
 header {
   border-bottom: 1px solid #000;
   width: 100%;
+  text-transform: uppercase;
 }
 
 section {
@@ -41,6 +42,18 @@ h2 {
 
 p {
   max-width: 600px;
+}
+
+#urlInput {
+  width: 60%;
+  height: 50px;
+}
+
+.btn {
+  width: 20%;
+  height: 50px;
+  padding: 10px;
+  margin: 20px auto;
 }
 
 

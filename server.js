@@ -51,13 +51,13 @@ app.get('/new/:userInput(*)', function(request, response){
          return response.send("Error saving to database"); 
       }
     });
-    //dont forget to handle error
     
     //display json data
     return response.json(data);
   }
   
-  alert('Please enter a valid URL');
+  //if userInput does not pass regex test:
+  return response.send('Please enter a valid URL.');
   
 });
   
