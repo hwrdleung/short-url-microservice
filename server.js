@@ -28,16 +28,16 @@ app.get('/:userInput(*)', function (request, response) {
   
   //check if urlToShorten is a URL
   //THANK YOU STACKOVERFLOW  
-  var urlPattern = new RegExp('^(https?:\/\/)?'+ // protocol
-    '((([a-z\d]([a-z\d-]*[a-z\d])*)\.)+[a-z]{2,}|'+ // domain name
-    '((\d{1,3}\.){3}\d{1,3}))'+ // OR ip (v4) address
-    '(\:\d+)?(\/[-a-z\d%_.~+]*)*'+ // port and path
-    '(\?[;&a-z\d%_.~+=-]*)?'+ // query string
-    '(\#[-a-z\d_]*)?$','i'); // fragment locater
+  var urlPattern = new RegExp(
+  
+    '(https?|ftp)://(www\d?|[a-zA-Z0-9]+)?\.[a-zA-Z0-9-]+(\:|\.)([a-zA-Z0-9.]+|(\d+)?)([/?:].*)?'
+    
+  );
   
   if(!urlPattern.test(userInput)) {
 
     var original_url;
+    
     //query database for shortUrl
     userInput.findOne({'short_url' : userInput}, (err, data)=>{
       //var re = new RegExp();
