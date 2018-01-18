@@ -43,10 +43,18 @@ h2 {
   text-align: center;
 }
 
-
-p {
-  max-width: 600px;
+h3 {
+ font-size: 20px; 
 }
+
+.url-endpoint {
+ color: gray; 
+}
+
+.url-user-input {
+  color: blue;
+}
+
 
 #urlInput {
   width: 60%;
