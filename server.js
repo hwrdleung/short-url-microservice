@@ -23,45 +23,10 @@ app.get("/", function (request, response) {
 }); 
 
 
-app.get('/:userInput(*)', function (request, response) {
-  var { userInput } = request.params;
+app.get('/:urlToShorten(*)', function (request, response) {
   
-  //check if urlToShorten is a URL
-  //THANK YOU STACKOVERFLOW  
-  var urlPattern = new RegExp(
+  var { urlToShorten } = request.params;
   
-    '(https?|ftp)://(www\d?|[a-zA-Z0-9]+)?\.[a-zA-Z0-9-]+(\:|\.)([a-zA-Z0-9.]+|(\d+)?)([/?:].*)?'
-    
-  );
-  
-  if(!urlPattern.test(userInput)) {
-
-    var original_url;
-    
-    //query database for shortUrl
-    userInput.findOne({'short_url' : userInput}, (err, data)=>{
-      //var re = new RegExp();
-    original_url = data.original_url;
-  
-        });
-    
-    response.redirect(original_url);
-        
-  } else {
-    
-  var short = Math.floor(Math.random()*100000).toString();
-  var data = new shortUrl({
-    original_url : userInput,
-    short_url : short
-  });
-  
-  data.save(err=>{
-    if(err){
-     return response.send("Error saving to db"); 
-    }
-  });
-  
-  response.json(data);  }
     
 });
 
