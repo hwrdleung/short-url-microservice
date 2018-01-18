@@ -44,20 +44,32 @@ h2 {
 }
 
 h3 {
- font-size: 20px; 
+ font-size: 25px; 
 }
 
 .url-endpoint {
- color: gray; 
+ color: green; 
+  backgr
 }
 
 .url-user-input {
   color: blue;
+  backgr
+}
+
+.short-url {
+  color: red;
+  backgro
+}
+
+p {
+ color: gray; 
+  font-size: 20px
 }
 
 
 #urlInput {
-  width: 60%;
+  width: 80%;
   height: 60px;
   font-size: 50px;
   padding: 0 35px;
