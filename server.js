@@ -30,13 +30,29 @@ app.get('/:urlToShorten(*)', function (request, response) {
   var regex = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;  
     
   if(regex.test(urlToShorten)){
+    //if urlToShorten passes Regex test, then it is a valid url.
+    //generate a random number to create a new shortURL for urlToShorten
+    //save this data to database using Object.save();
+    var randomNumber = Math.floor(Math.random() * 100000).toString();
+    var data = new shortUrl({
+      original_url: urlToShorten,
+      short_url: randomNumber
+    });
     
-    var short = Math.floor(Math.random() * 100000).toString();
-    var 
-    return response.json({urlToShorten : "works"});
+    data.save(err=>{
+      if(err){
+         return response.send('Error saving to database');
+      }
+    });
+    
+    return response.json(data);
   }
   
-  return response.json({urlToShorten : "Failed"});
+  var data = new shortUrl({
+    original_url : urlToShorten,
+    short_url : "Invalid URL"
+  });
+  return response.json(data);
 });
 
 
