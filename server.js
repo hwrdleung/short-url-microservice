@@ -22,7 +22,7 @@ app.get("/", function (request, response) {
   response.sendFile(__dirname + '/views/index.html');
 }); 
 
-app.get('/:userInput(*)', function(request, response){
+app.get('/new/:userInput(*)', function(request, response){
   
   /*
   possible scenarios:
@@ -57,6 +57,14 @@ app.get('/:userInput(*)', function(request, response){
     return response.json(data);
   }
   
+  alert('Please enter a valid URL');
+  
+});
+  
+  app.get('/:userInput', function(request, response){
+    
+    var userInput = request.params.userInput;
+    
  //check if userInput exists in our database
   shortUrl.findOne({'short_url' : userInput} , (err, data)=>{
     if(err){
@@ -82,7 +90,6 @@ app.get('/:userInput(*)', function(request, response){
     }
   });
 });
-
 
 // listen for requests :)
 var listener = app.listen(process.env.PORT, function () {
