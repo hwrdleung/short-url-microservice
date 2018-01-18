@@ -66,14 +66,18 @@ app.get('/:userInput(*)', function(request, response){
     //this block of code just takes the original_url in the database and checks to see if it
     //begins with 'http'.  if it doesn't, then it prepends 'http' to data.orignal_url
     //if no http, then response.redirect() will think it is a local file
-    var re = new RegExp("^(http|https)://","i");
-    var strToTest = data.original_url;
-    if(re.test(strToTest)){
-      response.redirect(301, data.original_url);                     
-    } else {
-       response.redirect(301, 'http://' + data.original_url); 
+    if(data !==  null){
+        var re = new RegExp("^(http|https)://","i");
+        var strToTest = data.original_url;
+        if(re.test(strToTest)){
+          response.redirect(301, data.original_url);                     
+        } else {
+           response.redirect(301, 'http://' + data.original_url); 
+        }
+            response.json(data.original_url);
+    }else if(data === null){
+      response.sendFile(p);
     }
-    
   });
   
   
